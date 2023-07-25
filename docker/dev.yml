@@ -1,0 +1,19 @@
+
+version: '2.7'
+services:
+  client:
+    container_name: ndee-blog-dev
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile.dev
+    entrypoint: npm run dev
+    tty: true
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - internal
+networks:
+  internal:
