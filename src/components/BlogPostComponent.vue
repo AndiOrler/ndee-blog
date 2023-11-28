@@ -10,11 +10,20 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from 'vue'
+
 const props = defineProps({
   title: {
     type: String
   }
 })
+
+watch(
+  () => props.title,
+  (x) => {
+    props.title == x
+  }
+)
 
 const postDate = new Date().toDateString()
 </script>

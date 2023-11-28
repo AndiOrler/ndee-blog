@@ -11,29 +11,35 @@ import BlogPostComponent from '@/components/BlogPostComponent.vue';
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount } from 'vue'
+import { onBeforeMount, watch } from 'vue'
 
 const myPosts = [
   {
     id: 1,
-    title: 'fooo',
+    title: 'Creating Blog',
     text: 'lorem ipsum'
   }
 ]
 
-onBeforeMount(() => {
-  fetchPosts()
-})
+// onBeforeMount(() => {
+//   fetchPosts()
+// })
 
-const fetchPosts = async () => {
-  try {
-    console.log('home page - trying to fetch posts')
+// const fetchPosts = async () => {
+//   try {
+//     console.log('home page - trying to fetch posts')
 
-    const response = await fetch('/posts.json')
-    const data = await response.json()
-    myPosts.push(data)
-  } catch (error) {
-    console.error('home page - error fetching posts:', error)
-  }
-}
+//     const response = await fetch('/posts.json')
+//     const data = await response.json()
+//     console.log('data', data)
+//     data.posts.forEach((element) => {
+//       console.log('pushing', element)
+
+//       myPosts.push(element)
+//     })
+//     console.log('foo', myPosts[0].title)
+//   } catch (error) {
+//     console.error('home page - error fetching posts:', error)
+//   }
+// }
 </script>
