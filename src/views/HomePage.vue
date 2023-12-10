@@ -1,10 +1,9 @@
-import BlogPostComponent from '@/components/BlogPostComponent.vue';
 <template>
   <PageHeader />
   <div class="page-body">
     <div class="row">
       <div v-for="post in myPosts" :key="post.id">
-        <BlogPostComponent :title="post.title"></BlogPostComponent>
+        <BlogPostComponent :post="post"></BlogPostComponent>
       </div>
     </div>
   </div>
@@ -12,34 +11,25 @@ import BlogPostComponent from '@/components/BlogPostComponent.vue';
 
 <script setup lang="ts">
 import { onBeforeMount, watch } from 'vue'
+import type { Post } from '@/models/types'
 
-const myPosts = [
-  {
-    id: 1,
-    title: 'Creating Blog',
-    text: 'lorem ipsum'
+const myPosts: Post[] = []
+
+onBeforeMount(() => {
+  fetchPosts()
+})
+
+const fetchPosts = async () => {
+  try {
+    const response = await fetch('/posts.json')
+    const data = await response.json()
+    console.log('pushing data')
+
+    data.posts.forEach((element: Post): void => {
+      myPosts.push(element)
+    })
+  } catch (error) {
+    console.error('home page - error fetching posts:', error)
   }
-]
-
-// onBeforeMount(() => {
-//   fetchPosts()
-// })
-
-// const fetchPosts = async () => {
-//   try {
-//     console.log('home page - trying to fetch posts')
-
-//     const response = await fetch('/posts.json')
-//     const data = await response.json()
-//     console.log('data', data)
-//     data.posts.forEach((element) => {
-//       console.log('pushing', element)
-
-//       myPosts.push(element)
-//     })
-//     console.log('foo', myPosts[0].title)
-//   } catch (error) {
-//     console.error('home page - error fetching posts:', error)
-//   }
-// }
+}
 </script>
