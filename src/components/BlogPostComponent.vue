@@ -5,14 +5,14 @@
         <h3 class="card-title">{{ props.post?.title }}</h3>
         <p class="ms-auto lh-1">{{ props.post?.date }}</p>
       </div>
-      <p class="ms-auto lh-1">{{ props.post?.text }}</p>
+      <div class="ms-auto lh-1">{{ props.post?.text }}</div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { Post } from '@/models/types'
-import { onMounted, watch } from 'vue'
+import { onMounted } from 'vue'
 
 const props = defineProps({
   post: {
