@@ -25,14 +25,21 @@ build_docker_dev:
 docker_dev: build_docker_dev
 	docker run -it -p 8080:8080 --rm --name ndee-blog-1 ndee-blog-dev
 
+MYIMAGE=ndee-blog
+
 docker_push:
-	@if [ $(shell docker images -q ndee-blog 2> /dev/null) ]; then \
-		echo "Removing Docker image: ndee-blog"; \
-		docker rmi ndee-blog; \
+	@if [ $(shell docker images -q $(MYIMAGE) 2> /dev/null) ]; then \
+		echo "Removing Docker image: $(MYIMAGE)"; \
+		docker rmi $(MYIMAGE); \
 	fi
 
-	docker build -t ndee-blog -f ~/dev/ndee-blog/docker/Dockerfile.prod .
-	docker tag ndee-blog dockerndee/ndee-blog
-	docker push dockerndee/ndee-blog
+	docker build -t $(MYIMAGE) -f ~/dev/ndee-blog/docker/Dockerfile.prod .
+	docker tag $(MYIMAGE) dockerndee/$(MYIMAGE)
+	docker push dockerndee/$(MYIMAGE)
+	echo "image pushed"
 
 
+test:
+	@if [ $(TEST) ]; then \
+		echo "success"; \
+	fi
