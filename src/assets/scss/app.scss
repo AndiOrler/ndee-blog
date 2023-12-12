@@ -1,13 +1,8 @@
-
-
-
-
-
-
 @import 'base/reset';
-
 
 // Libraries
 @import '@tabler/core/dist/css/tabler-vendors.min.css';
 @import '@tabler/core/dist/css/tabler.min.css';
 
+// Components
+@import 'components/blog-post';
